@@ -23,5 +23,20 @@ app.listen(3000, () => {
   console.log("server is listening to port 3000");
 });
 
+
+// any incoming requests with paths starting with "/api/user" will be directed to the userRoutes handlers
 app.use("/api/user", userRoutes);
 app.use("/api/auth", authRoutes);
+
+//middleware
+// Error-handling middleware is typically placed at the end of your middleware and route definitions.
+// middleware functions have a specific signature with parameters (req, res, next)
+app.use((err,req,res,next)=>{
+  const statusCode=err.statusCode||500;
+  const message=err.message||'internal server error';
+  res.status(statusCode).json({
+    succes:false,
+    statusCode,
+    message,
+  })
+})

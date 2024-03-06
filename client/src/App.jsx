@@ -8,6 +8,7 @@ import SignUp from './pages/SignUp'
 import About from './pages/About'
 import Header from './Components/Header'
 import FooterCom from './Components/Footer'
+import PrivateRoute from './Components/PrivateRoute'
 
 function App() {
   return (
@@ -18,7 +19,10 @@ function App() {
       <Route path='/about' element={<About/>} />
       <Route path='/sign-up' element={<SignUp/>} />
       <Route path='/sign-in' element={<SignIn/>} />
-      <Route path='/dashboard' element={<Dashboard/>} />
+      {/* to make dashboard private we used private route which only allows u to enter into a page if authenticated*/}
+      <Route element={<PrivateRoute />}>
+          <Route path='/dashboard' element={<Dashboard />} />
+        </Route>
       <Route path='/projects' element={<Projects/>} />
     </Routes>
     <FooterCom/>

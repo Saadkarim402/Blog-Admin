@@ -1,15 +1,16 @@
-import dotenv from "dotenv";
-import express from "express";
-import mongoose from "mongoose";
-import userRoutes from "./routes/user.route.js";
-import authRoutes from "./routes/auth.route.js";
+import express from 'express';
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+import userRoutes from './routes/user.route.js';
+import authRoutes from './routes/auth.route.js';
+import cookieParser from 'cookie-parser';
 
 dotenv.config();
 
 mongoose
   .connect(process.env.MONGO)
   .then(() => {
-    console.log("Server is connnected to Database");
+    console.log('MongoDb is connected');
   })
   .catch((err) => {
     console.log(err);
@@ -17,26 +18,22 @@ mongoose
 
 const app = express();
 
-//useing it to make json useble
 app.use(express.json());
+app.use(cookieParser());
+
 app.listen(3000, () => {
-  console.log("server is listening to port 3000");
+  console.log('Server is running on port 3000!');
 });
 
+app.use('/api/user', userRoutes);
+app.use('/api/auth', authRoutes);
 
-// any incoming requests with paths starting with "/api/user" will be directed to the userRoutes handlers
-app.use("/api/user", userRoutes);
-app.use("/api/auth", authRoutes);
-
-//middleware
-// Error-handling middleware is typically placed at the end of your middleware and route definitions.
-// middleware functions have a specific signature with parameters (req, res, next)
-app.use((err,req,res,next)=>{
-  const statusCode=err.statusCode||500;
-  const message=err.message||'internal server error';
+app.use((err, req, res, next) => {
+  const statusCode = err.statusCode || 500;
+  const message = err.message || 'Internal Server Error';
   res.status(statusCode).json({
-    succes:false,
+    success: false,
     statusCode,
     message,
-  })
-})
+  });
+});

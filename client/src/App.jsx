@@ -9,6 +9,8 @@ import About from './pages/About'
 import Header from './Components/Header'
 import FooterCom from './Components/Footer'
 import PrivateRoute from './Components/PrivateRoute'
+import OnlyAdminPrivateRoute from './Components/OnlyAdminPrivateRoute';
+import CreatePost from './pages/CreatePost';
 
 function App() {
   return (
@@ -22,6 +24,9 @@ function App() {
       {/* to make dashboard private we used private route which only allows u to enter into a page if authenticated*/}
       <Route element={<PrivateRoute />}>
           <Route path='/dashboard' element={<Dashboard />} />
+        </Route>
+        <Route element={<OnlyAdminPrivateRoute />}>
+          <Route path='/create-post' element={<CreatePost />} />
         </Route>
       <Route path='/projects' element={<Projects/>} />
     </Routes>

@@ -6,14 +6,14 @@ import Dashboard from './pages/Dashboard'
 import SignIn from './pages/SignIn'
 import SignUp from './pages/SignUp'
 import About from './pages/About'
-import Header from './Components/Header'
-import FooterCom from './Components/Footer'
-import PrivateRoute from './Components/PrivateRoute'
-import OnlyAdminPrivateRoute from './Components/OnlyAdminPrivateRoute';
+import Header from './components/Header'
+import FooterCom from './components/Footer'
+import PrivateRoute from './components/PrivateRoute'
+import OnlyAdminPrivateRoute from './components/OnlyAdminPrivateRoute';
 import CreatePost from './pages/CreatePost';
 import UpdatePost from './pages/UpdatePost';
 import PostPage from './pages/PostPage';
-import ScrollToTop from './Components/ScrollToTop';
+import ScrollToTop from './components/ScrollToTop';
 import Search from './pages/Search';
 
 
